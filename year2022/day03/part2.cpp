@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <array>
 #include <fstream>
 #include <iostream>
 #include <iterator>
@@ -16,23 +17,28 @@ int main(int argc, char **argv) {
   std::string file = argv[1];
   std::ifstream input_file(file);
 
-  std::string line;
-  std::string compartment1, compartment2;
-
   int total_priority = 0;
 
-  while (std::getline(input_file, line)) {
-    compartment1 = line.substr(0, line.length() / 2);
-    compartment2 = line.substr(line.length() / 2, line.length() / 2);
+  std::array<std::string, 3> group;
+  while (std::getline(input_file, group[0]) &&
+         std::getline(input_file, group[1]) &&
+         std::getline(input_file, group[2])) {
 
-    std::sort(std::begin(compartment1), std::end(compartment1));
-    std::sort(std::begin(compartment2), std::end(compartment2));
+    std::sort(std::begin(group[0]), std::end(group[0]));
+    std::sort(std::begin(group[1]), std::end(group[1]));
+    std::sort(std::begin(group[2]), std::end(group[2]));
 
     std::string intersections;
-    std::set_intersection(std::begin(compartment1), std::end(compartment1),
-                          std::begin(compartment2), std::end(compartment2),
+    std::set_intersection(std::begin(group[0]), std::end(group[0]),
+                          std::begin(group[1]), std::end(group[1]),
                           std::back_inserter(intersections));
 
+    int selection_len = intersections.length();
+    std::set_intersection(std::begin(intersections), std::end(intersections),
+                          std::begin(group[2]), std::end(group[2]),
+                          std::back_inserter(intersections));
+
+    intersections.erase(0, selection_len);
     intersections.erase(
         std::unique(std::begin(intersections), std::end(intersections)));
 
