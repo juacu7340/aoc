@@ -9,7 +9,7 @@ pub fn main() !void {
 
     const allocator = arena.allocator();
 
-    const file = try std.fs.cwd().openFile("sample.txt", .{});
+    const file = try std.fs.cwd().openFile("input.txt", .{});
     defer file.close();
 
     var counter: usize = 0;
