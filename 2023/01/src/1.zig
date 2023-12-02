@@ -1,20 +1,5 @@
 const std = @import("std");
 
-pub fn to_number(word: []u8) i32 {
-    const number_list = [][]u8{ "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine" };
-
-    var word_index = 0;
-    // TODO: end part 2
-    while (word_index < word.len) {
-        for (number) |number_list| {
-            var number_index = 0;
-            if (word[word_index] == number[number_index]) {}
-        }
-
-        word_index += 1;
-    }
-}
-
 pub fn main() !void {
     var gpa = std.heap.GeneralPurposeAllocator(.{}){};
     defer _ = gpa.deinit();
@@ -24,7 +9,7 @@ pub fn main() !void {
 
     const allocator = arena.allocator();
 
-    const file = try std.fs.cwd().openFile("sample.txt", .{});
+    const file = try std.fs.cwd().openFile("input.txt", .{});
     defer file.close();
 
     var counter: usize = 0;
