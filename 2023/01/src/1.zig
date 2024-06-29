@@ -12,6 +12,8 @@ pub fn main() !void {
     const file = try std.fs.cwd().openFile("input.txt", .{});
     defer file.close();
 
+    file.reader();
+
     var counter: usize = 0;
     while (true) {
         var line_buffer = std.ArrayList(u8).init(allocator);
