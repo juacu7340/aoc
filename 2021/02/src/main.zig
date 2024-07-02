@@ -19,7 +19,7 @@ pub fn @"1"(data: []const u8) !void {
             'f' => horizontal += number,
             'd' => depth += number,
             'u' => depth -= number,
-            else => {},
+            else => unreachable,
         }
     }
 
@@ -46,11 +46,13 @@ fn @"2"(data: []const u8) !void {
             },
             'd' => aim += number,
             'u' => aim -= number,
-            else => {},
+            else => unreachable,
         }
     }
 
-    std.debug.print("Part 2: {}\n", .{horizontal * depth});
+    std.debug.print(
+        \\Part 2: {}
+    , .{horizontal * depth});
 }
 
 pub fn main() !void {
